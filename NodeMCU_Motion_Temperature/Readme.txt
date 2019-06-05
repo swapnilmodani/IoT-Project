@@ -17,5 +17,5 @@ Circuit Connections:
 5. Supply power from the 3V supply to the Relay module.
 6. Connect the relay pin to the PIN D7 of the NodeMCU.
 7. Also connect the LED to PIN 13 of the NodeMCU.
-?8?. Common the ground and Vcc of LM35 Temperature Sensor and NodeMCU.
-?9?. Connect the Analog pin A0 of LM35 to the NodeMCU.
+8. Common the ground and Vcc of LM35 Temperature Sensor and NodeMCU.
+9. Connect the Analog pin A0 of LM35 to the NodeMCU.
