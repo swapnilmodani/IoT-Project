@@ -36,7 +36,7 @@ o	Cybersecurity and cloud computing.
 
 Weekly Roadmap  
 •	June 3rd through June 7th 
-1.	Sensors integration with the ESP8266: 
+1.	Sensors integration with the ESP8266:  
 We are working with 4 major sensors, i.e. PIR motion sensor, temperature sensor, sound sensor and the smoke sensor. Each one needs to be integrated with the microcontroller (in this case ESP8266 Nodemcu). 
 The code (Arduino) for each sensor needs to be written and checked with the respective sensor separately.
 Once all sensor codes are written, we will put them together and test all sensors simultaneously.
