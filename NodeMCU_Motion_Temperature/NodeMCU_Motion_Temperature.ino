@@ -27,7 +27,7 @@ Circuit Connections:
 
 int outputpin= A0; // Pin for the LM35
 int sensor_pin = 16; // Initialized the pin for motion sensor
-int relay_pin = 13; // Pin to control motion sensor
+int relay_pin = 13; // Pin to relay pin
 int output = 0;// Variable to store the output state of motion sensor
 int preoutput;
 void setup(){
