@@ -1,16 +1,17 @@
 #include <Wire.h>
 #include <Adafruit_ADS1015.h>
 
-// Adafruit_ADS1115 ads;  /* Use this for the 16-bit version */
-Adafruit_ADS1015 ads;     /* Use thi for the 12-bit version */
+Adafruit_ADS1115 ads;  /* Use this for the 16-bit version */
+// Adafruit_ADS1015 ads;     /* Use thi for the 12-bit version */
 
 void setup(void) 
 {
-  Serial.begin(9600);
-  Serial.println("Hello!");
+  Wire.begin(D2,D1);
+  Serial.begin(115200);
+ // Serial.println("Hello!");
   
-  Serial.println("Getting single-ended readings from AIN0..3");
-  Serial.println("ADC Range: +/- 6.144V (1 bit = 3mV/ADS1015, 0.1875mV/ADS1115)");
+//  Serial.println("Getting single-ended readings from AIN0..3");
+ // Serial.println("ADC Range: +/- 6.144V (1 bit = 3mV/ADS1015, 0.1875mV/ADS1115)");
   
   // The ADC input range (or gain) can be changed via the following
   // functions, but be careful never to exceed VDD +0.3V max, or to
@@ -36,11 +37,10 @@ void loop(void)
   adc1 = ads.readADC_SingleEnded(1);
   adc2 = ads.readADC_SingleEnded(2);
   adc3 = ads.readADC_SingleEnded(3);
-  Serial.print("AIN0: "); Serial.println(adc0);
-  Serial.print("AIN1: "); Serial.println(adc1);
-  Serial.print("AIN2: "); Serial.println(adc2);
-  Serial.print("AIN3: "); Serial.println(adc3);
-  Serial.println(" ");
-  
-  delay(1000);
+//Serial.print("AIN0: "); Serial.println(adc0);
+//Serial.print("AIN1: "); Serial.println(adc1);
+//Serial.print("AIN2: "); Serial.println(adc2);
+//Serial.print("AIN3: "); Serial.println(adc3);
+//Serial.println(" ");
+//delay(1000);
 }
