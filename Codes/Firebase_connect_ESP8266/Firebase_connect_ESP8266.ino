@@ -14,9 +14,12 @@
 // limitations under the License.
 //
 
+#include <Wire.h>
+#include <Adafruit_ADS1015.h>
+Adafruit_ADS1115 ads;  /* Use this for the 16-bit version */
+// Adafruit_ADS1015 ads;     /* Use thi for the 12-bit version */
 // FirebaseDemo_ESP8266 is a sample that demo the different functions
 // of the FirebaseArduino API.
-
 #include <ESP8266WiFi.h>
 #include <FirebaseArduino.h>
 
@@ -27,8 +30,8 @@
 #define WIFI_PASSWORD "hereyougo"
 
 void setup() {
-  Serial.begin(9600);
-
+  Serial.begin(115200);
+  Wire.begin(D2,D1);
   // connect to wifi.
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("connecting");
@@ -47,53 +50,119 @@ int n = 0;
 
 void loop() {
   // set value
-  Firebase.setFloat("number", 42.0);
-  // handle error
-  if (Firebase.failed()) {
-      Serial.print("setting /number failed:");
-      Serial.println(Firebase.error());  
-      return;
-  }
-  delay(1000);
-  
-  // update value
-  Firebase.setFloat("number", 43.0);
-  // handle error
-  if (Firebase.failed()) {
-      Serial.print("setting /number failed:");
-      Serial.println(Firebase.error());  
-      return;
-  }
-  delay(1000);
+    int16_t adc0, adc1, adc2, adc3;
+  int  temp = ads.readADC_SingleEnded(0);
+  int  sound = ads.readADC_SingleEnded(1);
+  int  smoke = ads.readADC_SingleEnded(2);
+  int analogValue = temp;
+  float millivolts = (analogValue/1024.0) * 3300; //3300 is the voltage provided by NodeMCU
+  float celsius = millivolts/10;
+  String SOUND = String(sound);
+  String TEMP = String(celsius);
+  String SMOKE = String(smoke);
 
+  
+  
+  
+  
+  
+  Firebase.setFloat("temperature",celsius);
+  // handle error
+  if (Firebase.failed()) {
+      Serial.print("setting /number failed:");
+      Serial.println(Firebase.error());  
+      return;
+  }
+  delay(1000);
   // get value 
-  Serial.print("number: ");
-  Serial.println(Firebase.getFloat("number"));
+  Serial.print("Temperature: ");
+  Serial.println(Firebase.getFloat("temperature"));
   delay(1000);
 
-  // remove value
-  Firebase.remove("number");
-  delay(1000);
 
-  // set string value
-  Firebase.setString("message", "hello world");
+  
+  
+  
+  
+  
+  
+    Firebase.setInt("smoke",smoke);
   // handle error
   if (Firebase.failed()) {
-      Serial.print("setting /message failed:");
+      Serial.print("setting /number failed:");
       Serial.println(Firebase.error());  
       return;
   }
+  delay(1000);
+  // get value 
+  Serial.print("Smoke: ");
+  Serial.println(Firebase.getInt("smoke"));
   delay(1000);
   
-  // set bool value
-  Firebase.setBool("truth", false);
+  
+  
+  
+  
+
+
+
+
+    Firebase.setInt("sound",sound);
   // handle error
   if (Firebase.failed()) {
-      Serial.print("setting /truth failed:");
+      Serial.print("setting /number failed:");
       Serial.println(Firebase.error());  
       return;
   }
   delay(1000);
+  // get value 
+  Serial.print("Sound: ");
+  Serial.println(Firebase.getInt("sound"));
+  delay(1000);
+  
+
+
+
+
+
+
+
+
+  
+  
+//  
+//  // set string value
+//  Firebase.setString("message", "hello world");
+//  // handle error
+//  if (Firebase.failed()) {
+//      Serial.print("setting /message failed:");
+//      Serial.println(Firebase.error());  
+//      return;
+//  }
+//  delay(1000);
+//  
+
+
+
+
+
+
+
+
+
+//  Firebase.setBool("truth", false);
+//  // handle error
+//  if (Firebase.failed()) {
+//      Serial.print("setting /truth failed:");
+//      Serial.println(Firebase.error());  
+//      return;
+//  }
+//  delay(1000);
+
+
+
+
+
 
   // append a new value to /logs
   String name = Firebase.pushInt("logs", n++);
