@@ -1,4 +1,3 @@
-
 from imutils.video import VideoStream
 import argparse
 import datetime
@@ -15,7 +14,7 @@ cv2.namedWindow("test")
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
 vidname= "output{}".format(vid_counter)
 
-out = cv2.VideoWriter('{}.avi'.format(vidname),fourcc, 20.0, (640,480))
+out = cv2.VideoWriter('{}.avi'.format(vidname),fourcc, 150.0, (640,480))
 
 
 
@@ -28,7 +27,7 @@ args = vars(ap.parse_args())
 # if the video argument is None, then we are reading from webcam
 if args.get("video", None) is None:
 	vs = VideoStream(src=0).start()
-	time.sleep(2.0)
+#	time.sleep(2.0)
 
 # otherwise, we are reading from a video file
 else:
@@ -110,8 +109,4 @@ while True:
 vs.stop() if args.get("video", None) is None else vs.release()
 out.release()
 cv2.destroyAllWindows()
-
-
-# cleanup the camera and close any open windows
-               
 
