@@ -15,10 +15,16 @@ from email import encoders
 import sys
 import os
 
-cap = cv2.VideoCapture(0)
+img_counter = 0
+vid_counter = 0
 
-def motion(img_counter = 0,vid_counter=0):
+cap = cv2.VideoCapture(1)
 
+def motion(in_1 = 0,in_2=0):
+        global img_counter
+        global vid_counter
+        img_counter = in_1
+        vid_counter = in_2
         previous= time.time()
         delta=0
         previousR= time.time()
@@ -97,7 +103,7 @@ def motion(img_counter = 0,vid_counter=0):
             frame=cv2.putText(frame,datet,(10, 50),font,1,(0,255,255),2, cv2.LINE_AA)
             out.write(frame)
             
-            if delta> 3:
+            if delta> 5:
                     delta=0
                     img_name = "opencv_frame_{}.png".format(img_counter)
                     frame=cv2.putText(frame,datet,(10, 50),font,1,(0,255,255),2, cv2.LINE_AA)
@@ -114,7 +120,7 @@ def motion(img_counter = 0,vid_counter=0):
                     img_counter += 1
                    # flag=True
                     
-            if deltaR>10:
+            if deltaR>20:
                     deltaR=0
                     server = smtplib.SMTP('smtp.gmail.com',587)
                     server.starttls()
@@ -127,7 +133,7 @@ def motion(img_counter = 0,vid_counter=0):
                     cv2.destroyAllWindows()
                     server.sendmail(email_user,email_send,text)
                     server.quit()
-                    motion(img_counter, vid_counter)          
+                    return [img_counter, vid_counter]         
 
           cv2.putText(frame, "Room Status: {}".format(text), (10, 20),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
           cv2.putText(frame, datetime.datetime.now().strftime("%A %d %B %Y %I:%M:%S%p"),(10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 0, 255), 1)
@@ -138,6 +144,7 @@ def motion(img_counter = 0,vid_counter=0):
 
           if key%256 == 27:   #ESC stops the program
             break
+while 1:
+        my_tuple = motion(img_counter, vid_counter)
 
-motion()
 
