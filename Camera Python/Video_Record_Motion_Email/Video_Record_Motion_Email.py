@@ -42,7 +42,7 @@ def motion(in_1 = 0,in_2=0):
         msg['From'] = email_user
         msg['To'] = email_send
         msg['Subject'] = subject
-        body = 'Hi there, these pictures are taken at your home now'
+        body = 'Hi there, these pictures are taken at your home now!! And to see the live video open this link http://192.168.1.121:5000'
         msg.attach(MIMEText(body,'plain'))
 
 
