@@ -36,7 +36,12 @@ def motion(in_1 = 0,in_2=0):
 
         email_user = 'projectiot8@gmail.com'
         email_password = 'iotiit123'
+
+
         email_send = 'projectiot8@gmail.com'
+        #email_send = '----------@gmail.com'
+
+        
         subject = 'Motion detected!'
         msg = MIMEMultipart()
         msg['From'] = email_user
