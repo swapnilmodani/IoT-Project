@@ -18,11 +18,11 @@ var database = firebase.database();
 var reftemp = firebase.database().ref('Temperature');
 fintemp = "";
 reftemp.on("value", function(snapshot) {
-   console.log(snapshot.val());
+   // console.log(snapshot.val());
    const swap = snapshot.val();
    fintemp = swap;
    var age = document.querySelector(".temperature");
-   age.textContent = fintemp;
+   age.textContent = (fintemp);
    if (tempon == "ON") {
     if (tempstatus == "above") {
       if (fintemp >= tempinp) {
@@ -84,7 +84,7 @@ reftemp.on("value", function(snapshot) {
 var refmotion = firebase.database().ref('Motion');
 finmotion = "";
 refmotion.on("value", function(snapshot) {
-   console.log(snapshot.val());
+   // console.log(snapshot.val());
    const swap = snapshot.val();
    finmotion = swap;
    var age = document.querySelector(".motion");
@@ -133,7 +133,7 @@ function relay_off(){
 var reffirclap = firebase.database().ref('First Clap');
 finfclap = "";
 reffirclap.on("value", function(snapshot) {
-   console.log(snapshot.val());
+   // console.log(snapshot.val());
    const swap = snapshot.val();
    finfclap = swap;
    var age = document.querySelector(".fclap");
@@ -163,7 +163,7 @@ reffirclap.on("value", function(snapshot) {
 var refsecclap = firebase.database().ref('Second Clap');
 finsclap = "";
 refsecclap.on("value", function(snapshot) {
-   console.log(snapshot.val());
+   // console.log(snapshot.val());
    const swap = snapshot.val();
    finsclap = swap;
    var age = document.querySelector(".sclap");
@@ -182,6 +182,111 @@ refsecclap.on("value", function(snapshot) {
 }, function (error) {
    console.log("Error: " + error.code);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var refrelay = firebase.database().ref('Relay');
+finrelay = "";
+refrelay.on("value", function(snapshot) {
+   // console.log(snapshot.val());
+   const swap = snapshot.val();
+   finrelay = swap;
+   var age = document.querySelector("#relaytext");
+   age.textContent = finrelay;
+   if (finrelay == "ON") {
+    document.getElementById('customSwitches').checked = true;
+   }
+   else if (finrelay == "OFF") {
+    document.getElementById('customSwitches').checked = false;
+   }
+
+
+
+
+
+}, function (error) {
+   console.log("Error: " + error.code);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -250,10 +355,10 @@ function threee() {
 
 
 
-var tempon="";
-var motionon="";
-var clapon="";
-var timeon="";
+var tempon="OFF";
+var motionon="OFF";
+var clapon="OFF";
+var timeon="OFF";
 
 var tempinp="";
 var tempstatus="";
@@ -263,7 +368,7 @@ function tempsave(){
   clapon = "OFF";
   timeon="OFF";
   tempinp = document.getElementById("inlineFormInputNameTemp").value;
-  alert(tempinp);
+  // alert(tempinp);
   var e = document.getElementById("inlineFormCustomSelectTemp");
   tempstatus = e.options[e.selectedIndex].value;
 }
@@ -306,24 +411,3 @@ function timesave(){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// setTimeout(relay_on,1000);
